@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>画像で神経衰弱</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ========== タイトル画面 ========== -->
+    <div id="screen-title" class="screen active">
+        <div class="screen-header">
+            <div class="header-left"></div>
+            <div class="header-right">
+                <button class="btn-sound" aria-label="サウンド切替">
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor"/>
+                        <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                    </svg>
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="32" height="32" style="display:none">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor" opacity="0.3"/>
+                        <line x1="18" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
+                        <line x1="22" y1="9" x2="18" y2="15" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="screen-body">
+            <div class="title-box">
+                <h1>画像で神経衰弱</h1>
+            </div>
+            <div class="spacer"></div>
+            <div class="title-actions">
+                <button class="btn-primary" id="btn-start">スタート</button>
+                <button class="btn-primary" id="btn-exit">終了</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 難易度選択画面 ========== -->
+    <div id="screen-difficulty" class="screen">
+        <div class="screen-header">
+            <div class="header-left">
+                <button class="btn-back" aria-label="戻る">
+                    <svg viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="header-right">
+                <button class="btn-sound" aria-label="サウンド切替">
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor"/>
+                        <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                    </svg>
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="32" height="32" style="display:none">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor" opacity="0.3"/>
+                        <line x1="18" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
+                        <line x1="22" y1="9" x2="18" y2="15" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="screen-body">
+            <div class="section-title-box">
+                <h2>難易度</h2>
+            </div>
+            <div class="spacer"></div>
+            <div class="difficulty-selector">
+                <button class="arrow-btn" id="btn-diff-left" aria-label="前の難易度">
+                    <svg viewBox="0 0 24 24" width="48" height="48">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/>
+                    </svg>
+                </button>
+                <div class="difficulty-display">
+                    <div class="stars" id="stars-display"></div>
+                    <div class="card-count" id="card-count-display">枚数：6枚</div>
+                </div>
+                <button class="arrow-btn" id="btn-diff-right" aria-label="次の難易度">
+                    <svg viewBox="0 0 24 24" width="48" height="48">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="spacer"></div>
+            <button class="btn-primary" id="btn-confirm-difficulty">決定</button>
+        </div>
+    </div>
+
+    <!-- ========== 画像選択画面 ========== -->
+    <div id="screen-image-select" class="screen">
+        <div class="screen-header">
+            <div class="header-left">
+                <button class="btn-back" aria-label="戻る">
+                    <svg viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="header-right">
+                <button class="btn-sound" aria-label="サウンド切替">
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor"/>
+                        <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                    </svg>
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="32" height="32" style="display:none">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor" opacity="0.3"/>
+                        <line x1="18" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
+                        <line x1="22" y1="9" x2="18" y2="15" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="screen-body">
+            <div class="section-title-box">
+                <h2>画像選択</h2>
+            </div>
+            <div class="spacer"></div>
+            <div class="image-options">
+                <button class="image-option" id="btn-custom-images">
+                    <span class="option-icon">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <rect x="4" y="8" width="56" height="48" rx="4" fill="none" stroke="currentColor" stroke-width="4"/>
+                            <polygon points="16,44 28,28 36,38 42,30 52,44" fill="currentColor"/>
+                            <circle cx="22" cy="24" r="5" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span class="option-label">任意の画像</span>
+                </button>
+                <button class="image-option" id="btn-album">
+                    <span class="option-label">アルバム</span>
+                    <span class="option-icon">
+                        <svg viewBox="0 0 64 64" width="64" height="64">
+                            <path d="M4 16h20l6-8h26c2.2 0 4 1.8 4 4v36c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V16z" fill="none" stroke="currentColor" stroke-width="4"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <!-- 隠しファイル入力 -->
+            <input type="file" id="file-input-images" accept="image/*" multiple style="display:none">
+        </div>
+    </div>
+
+    <!-- ========== プレビュー / ゲーム開始画面 ========== -->
+    <div id="screen-preview" class="screen">
+        <div class="screen-header">
+            <div class="header-left">
+                <button class="btn-back" aria-label="戻る">
+                    <svg viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="header-right">
+                <button class="btn-sound" aria-label="サウンド切替">
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor"/>
+                        <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                    </svg>
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="32" height="32" style="display:none">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor" opacity="0.3"/>
+                        <line x1="18" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
+                        <line x1="22" y1="9" x2="18" y2="15" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="screen-body">
+            <!-- 選択状況カウンター -->
+            <div class="selection-counter" id="selection-counter">
+                <span id="counter-text">3枚中 0枚選択済み</span>
+            </div>
+            <!-- プレビューエリア -->
+            <div class="preview-area" id="preview-area"></div>
+            <!-- アクションボタン -->
+            <div class="preview-actions">
+                <button class="btn-secondary" id="btn-add-more">画像を追加</button>
+                <button class="btn-primary btn-large" id="btn-game-start">ゲームスタート</button>
+            </div>
+            <!-- 隠しファイル入力（追加用） -->
+            <input type="file" id="file-input-add" accept="image/*" multiple style="display:none">
+        </div>
+    </div>
+
+    <!-- ========== ゲーム画面 ========== -->
+    <div id="screen-game" class="screen">
+        <div class="screen-header">
+            <div class="header-left">
+                <button class="btn-menu" id="btn-hamburger" aria-label="メニュー">
+                    <svg viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="header-right">
+                <button class="btn-sound" aria-label="サウンド切替">
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor"/>
+                        <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                    </svg>
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="32" height="32" style="display:none">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor" opacity="0.3"/>
+                        <line x1="18" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
+                        <line x1="22" y1="9" x2="18" y2="15" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="game-board" id="game-board"></div>
+
+        <!-- 画像拡大モーダル -->
+        <div class="image-modal" id="image-modal">
+            <div class="modal-content">
+                <img id="modal-image" src="" alt="拡大画像">
+                <button class="modal-close" id="modal-close" aria-label="閉じる">
+                    <svg viewBox="0 0 24 24" width="36" height="36">
+                        <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16.24 7.76L12 12l-4.24-4.24M7.76 16.24L12 12l4.24 4.24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- サイドメニュー -->
+        <div class="side-menu-overlay" id="side-menu-overlay"></div>
+        <div class="side-menu" id="side-menu">
+            <button class="menu-item" id="menu-return-title">タイトルに戻る</button>
+            <button class="menu-item" id="menu-restart">やり直す</button>
+        </div>
+    </div>
+
+    <!-- ========== クリア画面 ========== -->
+    <div id="screen-clear" class="screen">
+        <div class="screen-header">
+            <div class="header-left"></div>
+            <div class="header-right">
+                <button class="btn-sound" aria-label="サウンド切替">
+                    <svg class="icon-sound-on" viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor"/>
+                        <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                    </svg>
+                    <svg class="icon-sound-off" viewBox="0 0 24 24" width="32" height="32" style="display:none">
+                        <path d="M3 9v6h4l5 5V4L7 9H3z" fill="currentColor"/>
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" fill="currentColor" opacity="0.3"/>
+                        <line x1="18" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
+                        <line x1="22" y1="9" x2="18" y2="15" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="screen-body">
+            <h1 class="congrats-text">Congratulations!!</h1>
+            <div class="spacer"></div>
+            <div class="clear-actions">
+                <button class="btn-primary" id="btn-replay">再プレイ</button>
+                <button class="btn-primary" id="btn-return-title">タイトルに戻る</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 確認ダイアログモーダル ========== -->
+    <div class="confirm-modal" id="confirm-modal">
+        <div class="confirm-modal-content">
+            <p class="confirm-message" id="confirm-message">メッセージ</p>
+            <div class="confirm-buttons">
+                <button class="btn-confirm-cancel" id="confirm-cancel">いいえ</button>
+                <button class="btn-confirm-ok" id="confirm-ok">はい</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== アルバム管理モーダル ========== -->
+    <div class="album-modal" id="album-modal">
+        <div class="album-modal-content">
+            <div class="album-modal-header">
+                <h2 id="album-modal-title">アルバム</h2>
+                <button class="album-modal-close" id="album-modal-close" aria-label="閉じる">
+                    <svg viewBox="0 0 24 24" width="32" height="32">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="album-modal-body" id="album-modal-body">
+                <!-- 動的にコンテンツが挿入される -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

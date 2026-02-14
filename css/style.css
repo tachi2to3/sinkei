@@ -1,0 +1,1055 @@
+/* ===========================================
+   画像で神経衰弱 - メインスタイルシート
+   iPad タブレット最適化
+   =========================================== */
+
+/* --- リセット & ベース --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+    font-size: 18px;
+    color: #333;
+    background: #fff;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* --- 画面共通レイアウト --- */
+.screen {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* --- ヘッダー --- */
+.screen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 16px;
+    flex-shrink: 0;
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    align-items: center;
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.header-right {
+    justify-content: flex-end;
+}
+
+.btn-back,
+.btn-menu,
+.btn-sound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+
+.btn-back:active,
+.btn-menu:active,
+.btn-sound:active {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* --- 画面ボディ --- */
+.screen-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 32px;
+    overflow-y: auto;
+}
+
+.spacer {
+    flex: 1;
+}
+
+/* --- 共通ボタン --- */
+.btn-primary {
+    display: block;
+    min-width: 240px;
+    padding: 18px 40px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
+    background: #e8e8e8;
+    border: 2px solid #999;
+    border-radius: 6px;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.btn-primary:active {
+    background: #d0d0d0;
+    transform: scale(0.97);
+}
+
+.btn-primary.ready {
+    background: #4CAF50;
+    border-color: #388E3C;
+    color: #fff;
+}
+
+.btn-primary.ready:active {
+    background: #388E3C;
+}
+
+.btn-secondary {
+    display: block;
+    min-width: 180px;
+    padding: 14px 24px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: center;
+    background: #fff;
+    border: 2px solid #999;
+    border-radius: 6px;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.btn-secondary:active {
+    background: #f0f0f0;
+    transform: scale(0.97);
+}
+
+.btn-large {
+    min-width: 320px;
+    padding: 22px 48px;
+    font-size: 1.8rem;
+}
+
+/* ===========================================
+   タイトル画面
+   =========================================== */
+.title-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 28px 20px;
+    background: #e8e8e8;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.title-box h1 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.title-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 80px;
+}
+
+/* ===========================================
+   難易度選択画面
+   =========================================== */
+.section-title-box {
+    width: 100%;
+    max-width: 360px;
+    padding: 22px 20px;
+    background: #e8e8e8;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.section-title-box h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.difficulty-selector {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.arrow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+
+.arrow-btn:active {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.arrow-btn svg {
+    color: #555;
+}
+
+.difficulty-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 160px;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+    font-size: 2.2rem;
+    color: #bbb;
+    height: 40px;
+    align-items: center;
+}
+
+.star {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+}
+
+.card-count {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+#btn-confirm-difficulty {
+    margin-bottom: 60px;
+}
+
+/* ===========================================
+   画像選択画面
+   =========================================== */
+.image-options {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.image-option {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    background: #f0f0f0;
+    border: 2px solid #aaa;
+    border-radius: 10px;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.image-option:active {
+    background: #ddd;
+    transform: scale(0.97);
+}
+
+.option-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border: 2px solid #666;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.option-icon svg {
+    color: #444;
+}
+
+.option-label {
+    font-size: 1.6rem;
+    font-weight: 500;
+    flex: 1;
+    text-align: center;
+}
+
+/* ===========================================
+   プレビュー画面
+   =========================================== */
+.selection-counter {
+    width: 100%;
+    max-width: 500px;
+    padding: 16px 20px;
+    background: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+}
+
+.selection-counter.complete {
+    background: #E8F5E9;
+    border-color: #4CAF50;
+}
+
+#counter-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.selection-counter.complete #counter-text {
+    color: #2E7D32;
+}
+
+.preview-area {
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+    align-content: start;
+    padding: 10px 0;
+    overflow-y: auto;
+}
+
+.preview-item {
+    position: relative;
+    aspect-ratio: 1;
+}
+
+.preview-thumb {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+
+.preview-delete {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 32px;
+    height: 32px;
+    background: #e53935;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+.preview-delete:active {
+    background: #c62828;
+    transform: scale(0.9);
+}
+
+.preview-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    padding-top: 16px;
+    flex-shrink: 0;
+}
+
+#btn-game-start {
+    margin-bottom: 20px;
+}
+
+/* ===========================================
+   ゲーム画面
+   =========================================== */
+.game-board {
+    flex: 1;
+    display: grid;
+    gap: 12px;
+    padding: 16px 24px;
+    align-content: center;
+    justify-items: center;
+    overflow: hidden;
+}
+
+/* グリッドカラムは JS から動的に設定 */
+.game-board.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.game-board.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.game-board.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* --- カード --- */
+.card {
+    width: 100%;
+    aspect-ratio: 1;
+    perspective: 800px;
+    cursor: pointer;
+    max-width: 260px;
+}
+
+.card.matched {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.5s, opacity 0.5s;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-front {
+    background: #d9d9d9;
+    border: 1px solid #bbb;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: #f5f5f5;
+    border: 1px solid #bbb;
+}
+
+.card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- 画像拡大モーダル --- */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(80, 80, 80, 0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 80vw;
+    max-height: 70vh;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.modal-content img {
+    max-width: 80vw;
+    max-height: 70vh;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    object-fit: contain;
+}
+
+.modal-close {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    color: #333;
+    z-index: 101;
+}
+
+.modal-close:active {
+    background: #eee;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* --- サイドメニュー --- */
+.side-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 50;
+}
+
+.side-menu-overlay.active {
+    display: block;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+    z-index: 60;
+    padding: 80px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: left 0.3s ease;
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+.menu-item {
+    display: block;
+    width: 100%;
+    padding: 18px 20px;
+    font-size: 1.3rem;
+    text-align: left;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+
+.menu-item:active {
+    background: #e0e0e0;
+}
+
+/* ===========================================
+   クリア画面
+   =========================================== */
+.congrats-text {
+    font-size: 2.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-top: 80px;
+}
+
+.clear-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 80px;
+}
+
+/* ===========================================
+   確認ダイアログモーダル
+   =========================================== */
+.confirm-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-modal.active {
+    display: flex;
+}
+
+.confirm-modal-content {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 24px;
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+    animation: modalFadeIn 0.2s ease;
+}
+
+.confirm-message {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    color: #333;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.btn-confirm-cancel,
+.btn-confirm-ok {
+    min-width: 120px;
+    padding: 16px 24px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.btn-confirm-cancel {
+    background: #e0e0e0;
+    border: 2px solid #999;
+}
+
+.btn-confirm-cancel:active {
+    background: #ccc;
+    transform: scale(0.97);
+}
+
+.btn-confirm-ok {
+    background: #4CAF50;
+    border: 2px solid #388E3C;
+    color: #fff;
+}
+
+.btn-confirm-ok:active {
+    background: #388E3C;
+    transform: scale(0.97);
+}
+
+/* ===========================================
+   アルバム管理モーダル
+   =========================================== */
+.album-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    align-items: center;
+    justify-content: center;
+}
+
+.album-modal.active {
+    display: flex;
+}
+
+.album-modal-content {
+    background: #fff;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    animation: modalFadeIn 0.2s ease;
+}
+
+.album-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+.album-modal-header h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.album-modal-close {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.album-modal-close:active {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.album-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+}
+
+/* --- アルバムリスト表示 --- */
+.album-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.album-list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    transition: background 0.15s;
+}
+
+.album-list-item:active {
+    background: #e8e8e8;
+}
+
+.album-thumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    flex-shrink: 0;
+}
+
+.album-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.album-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.album-count {
+    font-size: 1rem;
+    color: #666;
+}
+
+.album-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-album-edit,
+.btn-album-delete {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+.btn-album-edit:active {
+    background: #e0e0e0;
+}
+
+.btn-album-delete {
+    color: #e53935;
+    border-color: #e53935;
+}
+
+.btn-album-delete:active {
+    background: #ffebee;
+}
+
+/* --- アルバム作成/編集フォーム --- */
+.album-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.album-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.album-form-label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.album-form-input {
+    padding: 14px 16px;
+    font-size: 1.3rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.album-form-input:focus {
+    border-color: #4CAF50;
+}
+
+.album-form-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 8px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.album-form-thumb {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}
+
+.album-form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    padding-top: 8px;
+}
+
+.btn-album-select-images {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    background: #f0f0f0;
+    border: 2px dashed #999;
+    border-radius: 8px;
+    color: #555;
+    transition: background 0.15s;
+}
+
+.btn-album-select-images:active {
+    background: #e0e0e0;
+}
+
+/* --- アルバムモーダル内ボタン --- */
+.btn-album-new {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    background: #E3F2FD;
+    border: 2px solid #2196F3;
+    border-radius: 8px;
+    color: #1976D2;
+    margin-bottom: 16px;
+}
+
+.btn-album-new:active {
+    background: #BBDEFB;
+}
+
+.album-empty-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* ===========================================
+   アニメーション
+   =========================================== */
+.screen {
+    transition: opacity 0.25s ease;
+}
+
+.screen.fade-in {
+    animation: screenFadeIn 0.3s ease forwards;
+}
+
+@keyframes screenFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- カード出現 --- */
+.card {
+    animation: cardAppear 0.3s ease forwards;
+    opacity: 0;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===========================================
+   レスポンシブ: iPad 縦向き最適化
+   =========================================== */
+@media (min-width: 768px) {
+    html {
+        font-size: 20px;
+    }
+
+    .screen-header {
+        height: 72px;
+        padding: 0 24px;
+    }
+
+    .screen-body {
+        padding: 24px 48px;
+    }
+
+    .title-box {
+        max-width: 480px;
+        padding: 36px 24px;
+    }
+
+    .title-box h1 {
+        font-size: 2.8rem;
+    }
+
+    .section-title-box {
+        max-width: 420px;
+        padding: 28px 24px;
+    }
+
+    .btn-primary {
+        min-width: 280px;
+        padding: 22px 48px;
+    }
+
+    .game-board {
+        gap: 16px;
+        padding: 20px 32px;
+    }
+
+    .image-options {
+        max-width: 480px;
+    }
+
+    .preview-area {
+        max-width: 600px;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .congrats-text {
+        font-size: 3.2rem;
+    }
+
+    .selection-counter {
+        max-width: 600px;
+    }
+
+    #counter-text {
+        font-size: 1.6rem;
+    }
+
+    .album-modal-content {
+        max-width: 550px;
+    }
+
+    .confirm-modal-content {
+        width: 450px;
+    }
+
+    .confirm-message {
+        font-size: 1.5rem;
+    }
+}
+
+/* iPad 横向き */
+@media (min-width: 1024px) {
+    .game-board {
+        padding: 20px 80px;
+    }
+
+    .card {
+        max-width: 200px;
+    }
+}
